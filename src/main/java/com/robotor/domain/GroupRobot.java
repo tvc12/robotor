@@ -38,4 +38,9 @@ public class GroupRobot {
         robot.ifPresent(stringDoubleEntry -> System.out.printf("Robot Type Energy Consumption Highest:: %s%n", stringDoubleEntry.getKey()));
         return this;
     }
+
+    public void printTotalEnergyConsumption() {
+        double totalEnergyConsumption = robots.stream().mapToDouble(robot -> robot.getEnergyConsumption(distance)).sum();
+        System.out.printf("Total Energy Consumption:: %s%n", totalEnergyConsumption);
+    }
 }

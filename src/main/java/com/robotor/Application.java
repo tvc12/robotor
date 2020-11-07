@@ -12,7 +12,8 @@ public class Application {
         GroupRobot groupRobot = setupRobot(robotTypes);
         groupRobot.go(10)
                 .printStatus()
-                .printEnergyConsumptionHighest();
+                .printEnergyConsumptionHighest()
+                .printTotalEnergyConsumption();
     }
 
     private static List<Class> getRobotTypes() {
