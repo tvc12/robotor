@@ -1,7 +1,6 @@
 package com.robotor.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +13,10 @@ public class RobotFactory {
         robots = new ArrayList<>();
     }
 
-    public <T extends Robot> RobotFactory create(Class<T> clazz, int quality) throws Exception {
+    public RobotFactory add(Class clazz, int quality) throws Exception {
         RobotBuilderEngine engine = engineAsMap.get(clazz);
         if (engine != null) {
-            List newRobots = engine.create(quality);
-            this.robots.addAll(newRobots);
+            this.robots.addAll(engine.create(quality));
         } else {
             throw new Exception(String.format("class:: %s can not create at this time", clazz));
         }
@@ -34,19 +32,3 @@ public class RobotFactory {
     }
 }
 
-class RobotFactoryBuilder {
-    private final Map<Class, RobotBuilderEngine> engineAsMap;
-
-    public RobotFactoryBuilder() {
-        this.engineAsMap = new HashMap<>();
-    }
-
-    public RobotFactoryBuilder addEngine(Class clazz, RobotBuilderEngine engine) {
-        this.engineAsMap.put(clazz, engine);
-        return this;
-    }
-
-    public RobotFactory build() {
-        return new RobotFactory(this.engineAsMap);
-    }
-}

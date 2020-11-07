@@ -1,7 +1,10 @@
 package com.robotor.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class GroupRobot {
     private double distance = 0;
@@ -11,17 +14,25 @@ public class GroupRobot {
         this.robots = robots;
     }
 
-    GroupRobot go(double distance) {
+    public GroupRobot go(double distance) {
         this.distance += distance;
         return this;
     }
 
-    GroupRobot printStatus() {
+    public GroupRobot printStatus() {
         robots.forEach(Robot::printInformation);
         return this;
     }
 
-    Optional<Robot> getEnergyConsumptionHighest() {
-        return robots.stream().max((robot1, robot2) -> robot1.getEnergyConsumption(distance) > robot1.getEnergyConsumption(distance) ? 1 : 0);
+    public GroupRobot printEnergyConsumptionHighest() {
+        Map<String, List<Robot>> groupRobots = robots.stream().collect(Collectors.groupingBy(Robot::getRobotType));
+        List<Map.Entry<String, Double>> robotEnergyConsumptionList = new ArrayList<>();
+        groupRobots.forEach((clazzAsString, robots) -> {
+            double sum = robots.stream().mapToDouble(robot -> robot.getEnergyConsumption(distance)).sum();
+            robotEnergyConsumptionList.add(Map.entry(clazzAsString, sum));
+        });
+        Optional<Map.Entry<String, Double>> robot = robotEnergyConsumptionList.stream().max((value1, value2) -> value1.getValue() > value2.getValue() ? 1 : 0);
+        robot.ifPresent(stringDoubleEntry -> System.out.printf("Robot Type Energy Consumption Highest:: %s%n", stringDoubleEntry.getKey()));
+        return this;
     }
 }
