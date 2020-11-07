@@ -25,6 +25,6 @@ public class Zattacker extends Robot {
 
     @Override
     public String getExtraPropertiesAsString() {
-        return String.format("Power:: %s%n", getPower());
+        return String.format("Power:: %s", getPower());
     }
 }

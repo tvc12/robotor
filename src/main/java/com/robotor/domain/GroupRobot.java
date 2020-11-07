@@ -20,7 +20,10 @@ public class GroupRobot {
     }
 
     public GroupRobot printStatus() {
-        robots.forEach(Robot::printInformation);
+        robots.forEach(robot -> {
+            robot.printInformation();
+            System.out.printf("Energy Consumption:: %s%n%n", robot.getEnergyConsumption(distance));
+        });
         return this;
     }
 

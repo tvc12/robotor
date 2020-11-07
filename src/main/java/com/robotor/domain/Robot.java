@@ -19,6 +19,6 @@ public abstract class Robot {
         System.out.printf("Weight:: %s%n", weight);
 
         String extraPropertiesAsString = getExtraPropertiesAsString();
-        System.out.printf("Properties:: %n%s", extraPropertiesAsString);
+        System.out.printf("%s%n", extraPropertiesAsString);
     }
 }

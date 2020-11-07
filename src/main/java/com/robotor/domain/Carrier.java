@@ -25,6 +25,6 @@ public class Carrier extends Robot {
 
     @Override
     public String getExtraPropertiesAsString() {
-        return String.format("Energy Warehouse:: %s%n", getEnergyWarehouse());
+        return String.format("Energy Warehouse:: %s", getEnergyWarehouse());
     }
 }
