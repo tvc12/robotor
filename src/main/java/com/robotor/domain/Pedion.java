@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Pedion extends Robot {
     private final int flexibility;
 
-    Pedion() {
+    public Pedion() {
         flexibility = ThreadLocalRandom.current().nextInt(1, 6);
     }
 

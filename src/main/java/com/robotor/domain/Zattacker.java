@@ -5,8 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Zattacker extends Robot {
     private double power;
 
-    Zattacker() {
-        power = ThreadLocalRandom.current().nextInt(20, 31);
+    public Zattacker() {
+        power = ThreadLocalRandom.current().nextDouble(20, 31);
     }
 
     @Override
